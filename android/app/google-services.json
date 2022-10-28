@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "47204225161",
+    "project_id": "fir-getx-app-2923f",
+    "storage_bucket": "fir-getx-app-2923f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47204225161:android:40c0a1a7dc13e781de3658",
+        "android_client_info": {
+          "package_name": "com.milanMonika.login_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47204225161-pvjhf9opmpic0ognt8ojljkkp2f2itic.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.milanMonika.login_ui",
+            "certificate_hash": "391ffdb76f688da8fd76ca07a223ea9ec8660c71"
+          }
+        },
+        {
+          "client_id": "47204225161-ivmcm8aeejc2sejio6n2di5pnse04oe6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbhUgm2b2-v96D5ikN9krbIeKaQZhH_t8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47204225161-ivmcm8aeejc2sejio6n2di5pnse04oe6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
