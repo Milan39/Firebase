@@ -3,18 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:login_ui/Authentication/auth_controller.dart';
 import 'package:login_ui/Screen/login_page.dart';
 
 import '../utils/App_Layout.dart';
 
-class welcomePage extends StatefulWidget {
-  const welcomePage({super.key});
+class welcomePage extends StatelessWidget {
+   String email;
+   welcomePage({super.key,required this.email});
 
-  @override
-  State<welcomePage> createState() => _welcomePageState();
-}
-
-class _welcomePageState extends State<welcomePage> {
   @override
   Widget build(BuildContext context) {
     List<String> methods = ['google.png', 'twitter.png', 'facebook.png'];
@@ -58,7 +55,7 @@ class _welcomePageState extends State<welcomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Welcome',
+                    email,
                     style: Styles.headline1.copyWith(color: Colors.black54),
                   ),
                   Text(
@@ -69,18 +66,20 @@ class _welcomePageState extends State<welcomePage> {
               ),
             ),
             Gap(AppSize.getHeight(200)),
-            Container(
-              height: AppSize.getHeight(55),
-              width: AppSize.getWidth(200),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSize.getHeight(30)),
-                image: DecorationImage(
-                    image: AssetImage('assets/images/btn.png'),
-                    fit: BoxFit.cover),
-              ),
-              child: Center(
-                child: GestureDetector(
-                  onTap: Get.back,
+            GestureDetector(
+              onTap: (){
+                authController.instance.logout();
+              },
+              child: Container(
+                height: AppSize.getHeight(55),
+                width: AppSize.getWidth(200),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(AppSize.getHeight(30)),
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/btn.png'),
+                      fit: BoxFit.cover),
+                ),
+                child: Center(
                   child: Text(
                     'Sign out',
                     style: Styles.headline1.copyWith(fontSize: 25),

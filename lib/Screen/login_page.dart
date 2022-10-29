@@ -2,7 +2,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:login_ui/Screen/sign_out.dart';
+import 'package:login_ui/Authentication/auth_controller.dart';
+import 'package:login_ui/Screen/sign_up.dart';
 import 'package:login_ui/utils/App_Layout.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +17,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController EmailController = TextEditingController();
+    TextEditingController PasswordController = TextEditingController();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -72,14 +75,16 @@ class _LoginPageState extends State<LoginPage> {
                               offset: Offset(1, 1))
                         ]),
                     child: TextField(
+                      controller: EmailController,
                       keyboardType: TextInputType.emailAddress,
                       cursorColor: Colors.black,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(5),
                         prefix: Icon(
                           Icons.email,
                           color: Colors.deepOrangeAccent,
                         ),
-                        hintText: ' User Name',
+                        hintText: ' Email',
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(
                             AppSize.getHeight(30),
@@ -112,9 +117,12 @@ class _LoginPageState extends State<LoginPage> {
                               offset: Offset(1, 1))
                         ]),
                     child: TextField(
+                      controller: PasswordController,
+                      obscureText: true,
                       keyboardType: TextInputType.text,
                       cursorColor: Colors.black,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(5),
                         prefix: Icon(
                           Icons.password,
                           color: Colors.deepOrangeAccent,
@@ -152,19 +160,28 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Gap(AppSize.getHeight(20)),
-            Container(
-              height: AppSize.getHeight(55),
-              width: AppSize.getWidth(200),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSize.getHeight(30)),
-                image: DecorationImage(
-                    image: AssetImage('assets/images/btn.png'),
-                    fit: BoxFit.cover),
-              ),
-              child: Center(
-                child: Text(
-                  'Sign in',
-                  style: Styles.headline1.copyWith(fontSize: 25),
+            // sign in button
+            GestureDetector(
+              onTap: () {
+                authController.instance.Login(
+                  EmailController.text,
+                  PasswordController.text,
+                );
+              },
+              child: Container(
+                height: AppSize.getHeight(55),
+                width: AppSize.getWidth(200),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(AppSize.getHeight(30)),
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/btn.png'),
+                      fit: BoxFit.cover),
+                ),
+                child: Center(
+                  child: Text(
+                    'Sign in',
+                    style: Styles.headline1.copyWith(fontSize: 25),
+                  ),
                 ),
               ),
             ),
@@ -184,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                         fontWeight: FontWeight.bold,
                       ),
                       recognizer: TapGestureRecognizer()
-                          ..onTap = () => Get.to(() => SignOutPage()),
+                        ..onTap = () => Get.to(() => signupPage()),
                     )
                   ]),
             )

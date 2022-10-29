@@ -3,21 +3,28 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:login_ui/Authentication/auth_controller.dart';
 import 'package:login_ui/Screen/welcome_page.dart';
 
 import '../utils/App_Layout.dart';
 
-class SignOutPage extends StatefulWidget {
-  const SignOutPage({super.key});
+class signupPage extends StatefulWidget {
+  const signupPage({super.key});
 
   @override
-  State<SignOutPage> createState() => _SignOutPageState();
+  State<signupPage> createState() => _signupPageState();
 }
 
-class _SignOutPageState extends State<SignOutPage> {
+class _signupPageState extends State<signupPage> {
   @override
   Widget build(BuildContext context) {
-    List<String> methods = ['google.png', 'twitter.png', 'facebook.png'];
+    var emailController = TextEditingController();
+    var passwordController = TextEditingController();
+    List<String> methods = [
+      'google.png',
+      'twitter.png',
+      'facebook.png',
+    ];
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -79,14 +86,17 @@ class _SignOutPageState extends State<SignOutPage> {
                               offset: Offset(1, 1))
                         ]),
                     child: TextField(
-                      keyboardType: TextInputType.emailAddress,
+                      controller: emailController,
                       cursorColor: Colors.black,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(
+                          left: 5,
+                        ),
                         prefix: Icon(
                           Icons.email,
                           color: Colors.deepOrangeAccent,
                         ),
-                        hintText: ' User Name',
+                        hintText: ' Email',
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(
                             AppSize.getHeight(30),
@@ -119,9 +129,11 @@ class _SignOutPageState extends State<SignOutPage> {
                               offset: Offset(1, 1))
                         ]),
                     child: TextField(
-                      keyboardType: TextInputType.text,
+                      obscureText: true,
+                      controller: passwordController,
                       cursorColor: Colors.black,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(5),
                         prefix: Icon(
                           Icons.password,
                           color: Colors.deepOrangeAccent,
@@ -139,6 +151,12 @@ class _SignOutPageState extends State<SignOutPage> {
                           ),
                           borderSide: BorderSide(color: Colors.white),
                         ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            AppSize.getHeight(30),
+                          ),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
@@ -147,20 +165,27 @@ class _SignOutPageState extends State<SignOutPage> {
             ),
             Gap(AppSize.getHeight(10)),
             Gap(AppSize.getHeight(20)),
-            Container(
-              height: AppSize.getHeight(55),
-              width: AppSize.getWidth(200),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSize.getHeight(30)),
-                image: DecorationImage(
-                    image: AssetImage('assets/images/btn.png'),
-                    fit: BoxFit.cover),
-              ),
-              child: Center(
-                child: GestureDetector(
-                  onTap: () => Get.to(() => welcomePage()),
+
+            // sign up button
+            GestureDetector(
+              onTap: () {
+                authController.instance.register(
+                  emailController.text,
+                  passwordController.text,
+                );
+              },
+              child: Container(
+                height: AppSize.getHeight(55),
+                width: AppSize.getWidth(200),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(AppSize.getHeight(30)),
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/btn.png'),
+                      fit: BoxFit.cover),
+                ),
+                child: Center(
                   child: Text(
-                    'Sign in',
+                    'Sign up',
                     style: Styles.headline1.copyWith(fontSize: 25),
                   ),
                 ),
@@ -174,10 +199,7 @@ class _SignOutPageState extends State<SignOutPage> {
                 style: Styles.headline2.copyWith(fontSize: 17),
               ),
             ),
-
             Gap(AppSize.getHeight(90)),
-
-            // Dont have an account? Create
             RichText(
               text: TextSpan(
                 text: 'Sign up using the following method',
