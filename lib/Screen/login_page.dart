@@ -161,11 +161,11 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Gap(AppSize.getHeight(20)),
             // sign in button
-            GestureDetector(
+            InkWell(
               onTap: () {
                 authController.instance.Login(
-                  EmailController.text,
-                  PasswordController.text,
+                  EmailController.text.trim(),
+                  PasswordController.text.trim(),
                 );
               },
               child: Container(

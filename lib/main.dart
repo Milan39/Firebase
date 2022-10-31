@@ -8,9 +8,11 @@ import 'package:get/get.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) => Get.put(authController()),);
+  await Firebase.initializeApp().then(
+    (value) => Get.put(authController()),
+  );
   runApp(MyApp());
-} 
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

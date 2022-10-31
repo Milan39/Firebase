@@ -54,12 +54,12 @@ class authController extends GetxController {
  * if the user is already login, welcome page will be shown with the user email address
  */
   _initalScreen(User? user) {
-    if (User == null) {
-      print('LoginPage');
-      Get.offAll(() => LoginPage());
+    if (user == null) {
+      print('Null');
+      Get.to(LoginPage());
     } else {
       print('Welcome Page');
-      Get.offAll(() => welcomePage(email: user!.email!));
+      Get.to(welcomePage(email: user!.email!));
     }
   }
 
@@ -68,7 +68,7 @@ class authController extends GetxController {
    * user will register using email and password 
    * if the regestration is failed then exception is thrown with snackbar
    */
-  void register(String email, password) async {
+  Future<void> register(String email, password) async {
     try {
       await auth.createUserWithEmailAndPassword(
         email: email,
@@ -98,7 +98,7 @@ class authController extends GetxController {
   /**
    * Login method
    */
-  void Login(String email, password) async {
+  Future<void> Login(String email, password) async {
     try {
       await auth.signInWithEmailAndPassword(
         email: email,
@@ -129,7 +129,7 @@ class authController extends GetxController {
    * Logout method
    */
 
-  void logout()async{
+  Future<void> logout() async {
     await auth.signOut();
   }
 }
